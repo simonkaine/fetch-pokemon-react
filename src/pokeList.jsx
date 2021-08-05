@@ -7,7 +7,10 @@ class List extends Component {
         return ( 
             <>
             <h2>List page is working</h2>
-            <Pokemon />
+            {this.props.results.map((item) => {
+                return <Pokemon pokemon={item.pokemon} />
+            })}
+            
             </>
          );
     }
