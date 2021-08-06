@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class Dropdown extends Component {
+class DropdownSort extends Component {
     state = {  }
     render() { 
         return ( 
-            <div className='Dropdown'>
+            <div className='DropdownSort'>
                 <select onChange={this.props.sortOrder}>
                     <option value={'asc'}>Ascending</option>
                     <option value={'desc'}>Descending</option>
@@ -15,4 +15,4 @@ class Dropdown extends Component {
     }
 }
  
-export default Dropdown;
+export default DropdownSort;
