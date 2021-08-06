@@ -5,9 +5,8 @@ class Pokemon extends Component {
     render() { 
         return ( 
             <>
-            <h3>This item page is working too</h3>
                 <p>
-                    {this.props.pokemon};
+                    {this.props.pokemon}
                 </p>
             </>
          );

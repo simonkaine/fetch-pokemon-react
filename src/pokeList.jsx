@@ -4,13 +4,12 @@ import Pokemon from './pokeItem.jsx';
 class List extends Component {
     state = {  }
     render() { 
+        const { pokeProp } = this.props;
         return ( 
             <>
-            <h2>List page is working</h2>
-            {this.props.results.map((item) => {
+            {pokeProp.map((item) => {
                 return <Pokemon pokemon={item.pokemon} />
             })}
-            
             </>
          );
     }
