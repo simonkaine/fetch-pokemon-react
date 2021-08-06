@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropdown from './dropdown.jsx';
 import List from './pokeList.jsx';
-// import Loading from './loading.jsx';
 import Loader from 'react-loader-spinner'
 
 class App extends Component {
