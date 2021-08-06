@@ -3,11 +3,16 @@ import Dropdown from './dropdown.jsx';
 import List from './pokeList.jsx';
 
 class App extends Component {
-  state = { pokedex: [] };
+  state = { pokedex: [], query: null };
 
   fetchData = async () => {
     // grab the API url
     let url = "https://pokedex-alchemy.herokuapp.com/api/pokedex";
+
+    if (this.state.query) {
+      url = url + `?pokemon=${this.state.query}`
+    }
+
     // Fetch the Url
     let resonse = await fetch(url);
     // we need to grab the body object data using json()
@@ -23,12 +28,18 @@ class App extends Component {
       this.fetchData();
   }
 
+  handleQueryUpdate = (event) => {
+    // console.log(event.target.value);
+    // 
+    this.setState({query: event.target.value});
+  }
+
   render() { 
     return ( 
       <>
         <h1>Pokedex</h1>
-        <input type="text"></input>
-        <button>Search</button>
+        <input type="text" onChange={this.handleQueryUpdate}></input>
+        <button onClick={this.fetchData}>Search</button>
         <Dropdown />
         <List pokeProp={this.state.pokedex} />
       </>
