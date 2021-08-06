@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Dropdown from './dropdown.jsx';
+import DropdownSort from './dropdown.jsx';
 import List from './pokeList.jsx';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import DropdownType from './dropdownType.jsx';
 
 class App extends Component {
-  state = { pokedex: [], query: null, sortPokemonOrder: 'asc', loading: false };
+  state = { pokedex: [], query: null, sortPokemonOrder: 'asc', loading: false, sortType: '' };
 
   // this function grabs the fetched data from the API
   componentDidMount(){
@@ -26,6 +27,11 @@ class App extends Component {
       searchOrderParam.set('sort', 'pokemon');
       searchOrderParam.set('direction', this.state.sortPokemonOrder);
     }
+
+    if (this.state.sortType) {
+      searchOrderParam.set('sort', this.state.sortType);
+    }
+
     url = url + `?${searchOrderParam.toString()}`;
 
     // Fetch the Url
@@ -38,7 +44,7 @@ class App extends Component {
     //set state of the above data + state.
     setTimeout(() => {
       this.setState({ pokedex: data.results, loading: false });
-    }, 4000)
+    }, 1000)
     
   }
 
@@ -51,18 +57,33 @@ class App extends Component {
     this.setState({ sortPokemonOrder: event.target.value })
   } 
 
+  handleCategoryUpdate = (event) => {
+    this.setState({ sortType: event.target.value})
+    // this.fetchData();
+  }
+
   render() { 
+
+    const {pokedex} = this.state;
+
+    const filteredPokemon = pokedex.filter(
+      (item) => (item.category === this.state.category || this.state.category === pokedex)
+     );
+
     return ( 
       <>
         <h1>Pokedex</h1>
         {this.state.loading && <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />}
         <input type="text" onChange={this.handleQueryUpdate}></input>
         <button onClick={this.fetchData}>Search</button>
-        <Dropdown sortOrder={this.HandleSortOrderUpdate}/>
-        {!this.state.loading && <List pokeProp={this.state.pokedex} />}
+        <DropdownSort sortOrder={this.HandleSortOrderUpdate}/>
+        <DropdownType sortType={this.handleCategoryUpdate}/>
+        {!this.state.loading && <List pokeProp={filteredPokemon} />}
       </>
      );
   }
 }
  
 export default App;
+
+// {!this.state.loading && <List pokeProp={this.state.pokedex} />}

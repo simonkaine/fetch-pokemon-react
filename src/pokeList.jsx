@@ -9,7 +9,7 @@ class List extends Component {
         return ( 
             <>
             {pokeProp.map((item, index) => {
-                return <Pokemon key={index} pokemon={item.pokemon} />
+                return <Pokemon key={index} pokemon={item} />
             })}
             </>
          );
