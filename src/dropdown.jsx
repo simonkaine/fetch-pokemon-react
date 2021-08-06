@@ -5,9 +5,9 @@ class Dropdown extends Component {
     render() { 
         return ( 
             <div className='Dropdown'>
-                <select>
-                    <option>Asc</option>
-                    <option>Dsc</option>
+                <select onChange={this.props.sortOrder}>
+                    <option value={'asc'}>Ascending</option>
+                    <option value={'desc'}>Descending</option>
                 </select>
             </div>
 
