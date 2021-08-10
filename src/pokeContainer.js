@@ -3,10 +3,11 @@ import DropdownSort from './dropdown.jsx';
 import List from './pokeList.jsx';
 import Loader from 'react-loader-spinner';
 import DropdownType from './dropdownType.jsx';
+import Pagination from './pagination.js';
 
 class PokeContainer extends Component {
 
-  state = { pokedex: [], query: null, sortPokemonOrder: 'asc', loading: false, sortType: '' };
+  state = { pokedex: [], query: null, sortPokemonOrder: 'asc', loading: false, sortType: '', pageState: 1  };
 
   // this function grabs the fetched data from the API
   componentDidMount(){
@@ -21,6 +22,8 @@ class PokeContainer extends Component {
     // In order to update the url param, interpolate with choice pokemon
     // URLsearchParams, including set method
     const searchOrderParam = new URLSearchParams();
+    searchOrderParam.set('page', this.state.pageState)
+
     if (this.state.query) {
       searchOrderParam.set('pokemon', this.state.query);
     }
@@ -60,12 +63,21 @@ class PokeContainer extends Component {
 
   handleCategoryUpdate = (event) => {
     this.setState({ sortType: event.target.value})
-    // this.fetchData();
+  }
+
+  nextPage = async () => {
+    await this.setState({ pageState: this.state.pageState + 1 });
+    this.fetchData();
+  }
+
+  prevPage = async () => {
+    await this.setState({ pageState: this.state.pageState - 1 });
+    this.fetchData();
   }
 
   render() { 
 
-    const {pokedex} = this.state;
+    const {pokedex } = this.state;
 
     const filteredPokemon = pokedex.filter(
       (item) => (item.category === this.state.category || this.state.category === pokedex)
@@ -75,10 +87,15 @@ class PokeContainer extends Component {
       <>
         <h1>Pokedex</h1>
         {this.state.loading && <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />}
+
         <input type="text" onChange={this.handleQueryUpdate}></input>
         <button onClick={this.fetchData}>Search</button>
+
         <DropdownSort sortOrder={this.HandleSortOrderUpdate}/>
         <DropdownType sortType={this.handleCategoryUpdate}/>
+        <Pagination nextPage={this.nextPage} prevPage={this.prevPage} 
+        pageState={this.state.pageState}/>
+
         {!this.state.loading && <List pokeProp={filteredPokemon} />}
       </>
      );
