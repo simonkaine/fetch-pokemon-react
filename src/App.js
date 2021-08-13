@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import PokeContainer from './pokeContainer.js';
 import Header from './header.js';
 import PokeDetailsPage from './pokeDetail.js';
+import HomePage from './home.js';
 
 
 class App extends Component {
@@ -16,9 +17,7 @@ class App extends Component {
           <Switch>
             <Route path="/pokemon/:pokeId" component={PokeDetailsPage}></Route>
             <Route path="/pokemon" component={PokeContainer} />
-            <Route path="/" exact>
-                <h2>This is what renders from the HOME path</h2>
-            </Route>
+            <Route path="/" exact component={HomePage}></Route>
           </Switch>
         </BrowserRouter>
       </section>
