@@ -4,10 +4,11 @@ import PokeContainer from './pokeContainer.js';
 import Header from './header.js';
 import PokeDetailsPage from './pokeDetail.js';
 import HomePage from './home.js';
+import './pokemon.css';
 
 
 class App extends Component {
-  state = {  }
+  
   render() { 
     return (
       <section className="mainApp">
@@ -24,7 +25,7 @@ class App extends Component {
     );
   }
 }
- 
+
 export default App;
 
 // {!this.state.loading && <List pokeProp={this.state.pokedex} />}
