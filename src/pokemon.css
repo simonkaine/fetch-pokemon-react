@@ -27,3 +27,8 @@ nav li a:hover {
 	color: #000;
     background-image: linear-gradient(to bottom,  rgb(94, 121, 105) , rgb(255, 255, 255));
 }
+
+img {
+    width: 151px;
+    height: 151px;
+}

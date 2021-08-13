@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
+import './pokemon.css';
 
 class PokeDetailsPage extends Component {
     state = { data: {}, loading: false }
@@ -26,9 +27,18 @@ class PokeDetailsPage extends Component {
         return ( 
             <div>
                 {!this.state.loading && <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />}
-                <h3>This is the details page where a Pokemon will render</h3>
-                <p>{data.pokemon}</p>
+                <h1>{data.pokemon}</h1>
                 <img src={data.url_image} alt="pokemon"></img>
+                <ul>
+                    <li>Type 1: {data.type_1}</li>
+                    <li>Type 2: {data.type_2}</li>
+                    <li>Attack: {data.attack}</li>
+                    <li>Defense: {data.defense}</li>
+                    <li>Hp: {data.hp}</li>
+                    <li>Speed: {data.speed}</li>
+                    <li>Height: {data.height} cm or センチメートル</li>
+                    <li>Weight: {data.weight} Kgs or 毫</li>
+                </ul>
             </div>
             
          );
