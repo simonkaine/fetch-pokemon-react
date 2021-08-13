@@ -3,10 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import PokeContainer from './pokeContainer.js';
 import Header from './header.js';
 import PokeDetailsPage from './pokeDetail.js';
+import HomePage from './home.js';
+import './pokemon.css';
 
 
 class App extends Component {
-  state = {  }
+  
   render() { 
     return (
       <section className="mainApp">
@@ -16,16 +18,14 @@ class App extends Component {
           <Switch>
             <Route path="/pokemon/:pokeId" component={PokeDetailsPage}></Route>
             <Route path="/pokemon" component={PokeContainer} />
-            <Route path="/" exact>
-                <h2>This is what renders from the HOME path</h2>
-            </Route>
+            <Route path="/" exact component={HomePage}></Route>
           </Switch>
         </BrowserRouter>
       </section>
     );
   }
 }
- 
+
 export default App;
 
 // {!this.state.loading && <List pokeProp={this.state.pokedex} />}
